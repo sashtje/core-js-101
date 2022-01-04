@@ -120,9 +120,12 @@ function retry(func, attempts) {
   return () => {
     for (let i = 1; i <= attempts; i += 1) {
       try {
-        return func();
+        if (i === attempts) {
+          return func();
+        }
+        func();
       } catch (e) {
-        console.log(e);
+        //
       }
     }
     return 0;
